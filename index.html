@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>SALVO GROUP Fun English Guess - 250 Vocabulary Sehari-hari, FOR KIDS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #2b6e9e 0%, #1e4a6e 100%);
+            font-family: 'Comic Neue', 'Comic Sans MS', 'Segoe UI Emoji', 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .game-container {
+            max-width: 850px;
+            width: 100%;
+            background: #fef9e8;
+            border-radius: 70px;
+            box-shadow: 0 25px 35px rgba(0, 0, 0, 0.3);
+            padding: 20px 20px 35px;
+            transition: all 0.2s ease;
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 0 0 5px 0;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ffb347, #ff7e05);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        .badge {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #e68a2e;
+            background: #fff0db;
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 15px;
+            padding: 5px 15px;
+            border-radius: 40px;
+            font-weight: bold;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: #ffe3b5;
+            padding: 12px 20px;
+            border-radius: 60px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .progress-bar {
+            background: #d9c29e;
+            border-radius: 30px;
+            height: 12px;
+            margin: 10px 0 15px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: #ffaa3c;
+            height: 100%;
+            width: 0%;
+            border-radius: 30px;
+            transition: width 0.3s ease;
+        }
+        
+        .image-area {
+            background: #fffaf2;
+            border-radius: 65px;
+            padding: 20px;
+            margin: 5px 0 20px;
+            text-align: center;
+            box-shadow: inset 0 0 0 3px white, 0 12px 20px rgba(0, 0, 0, 0.1);
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .guess-img {
+            max-width: 100%;
+            max-height: 240px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            background: #f7e9d7;
+            border-radius: 45px;
+            padding: 10px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .guess-emoji {
+            font-size: 150px;
+            display: inline-block;
+            background: #f7e9d7;
+            padding: 20px;
+            border-radius: 60px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .answer-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        #answerInput {
+            flex: 3;
+            min-width: 180px;
+            padding: 12px 18px;
+            font-size: 1.1rem;
+            font-family: inherit;
+            border: 3px solid #ffbc6e;
+            border-radius: 60px;
+            text-align: center;
+            background: white;
+            font-weight: bold;
+            outline: none;
+        }
+        
+        #answerInput:focus {
+            border-color: #ff9500;
+            box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.3);
+        }
+        
+        button {
+            background: #ffaa3c;
+            border: none;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: 0.1s linear;
+            box-shadow: 0 4px 0 #b4621a;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b4621a;
+        }
+        
+        .hint-btn {
+            background: #5f9ea0;
+            box-shadow: 0 4px 0 #3c6e6e;
+        }
+        
+        .next-btn {
+            background: #43b380;
+            box-shadow: 0 4px 0 #2b6e4c;
+            width: 100%;
+        }
+        
+        .synonym-area {
+            background: #e9f4e3;
+            border-radius: 45px;
+            padding: 10px 15px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2c5a2e;
+            border-left: 12px solid #ffb347;
+        }
+        
+        .feedback {
+            font-size: 1rem;
+            text-align: center;
+            padding: 8px;
+            border-radius: 40px;
+            background: #ffe1b3;
+            margin-top: 8px;
+        }
+        
+        .upload-section {
+            margin-top: 20px;
+            background: #fff0db;
+            border-radius: 40px;
+            padding: 15px;
+            text-align: center;
+            border: 2px dashed #ffaa3c;
+        }
+        
+        .upload-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .upload-row select, .upload-row input {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            border-radius: 40px;
+            border: 2px solid #ffbc6e;
+            font-family: inherit;
+        }
+        
+        .gallery-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 12px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 8px;
+        }
+        
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            padding: 5px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid #ffaa3c;
+            width: 70px;
+        }
+        
+        .gallery-item img {
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .gallery-item span {
+            font-size: 9px;
+            display: block;
+            margin-top: 3px;
+        }
+        
+        .info-text {
+            font-size: 0.7rem;
+            color: #c08d4b;
+            margin-top: 8px;
+        }
+        
+        .word-counter {
+            background: #ffaa3c30;
+            border-radius: 30px;
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+        
+        @media (max-width: 550px) {
+            .guess-emoji { font-size: 100px; }
+            button { padding: 8px 14px; font-size: 0.9rem; }
+            .stats { font-size: 1rem; }
+            h1 { font-size: 1.4rem; }
+        }
+        
+        .message-positive {
+            background: #c8e6b5;
+            color: #2f6b2f;
+        }
+        
+        .message-wrong {
+            background: #ffccbc;
+            color: #b13e3e;
+        }
+    </style>
+</head>
+<body>
+<div class="game-container">
+    <h1>🕵️‍♂️ GUESS THE PICTURE ✨</h1>
+    <div style="text-align: center;">
+        <span class="badge">🔤 250 Vocabulary Sehari-hari + Sinonim</span>
+    </div>
+
+    <div class="stats">
+        <div>⭐ Skor: <span id="scoreValue">0</span></div>
+        <div>❤️ Nyawa: <span id="livesValue">5</span></div>
+        <div>📚 Soal: <span id="currentQuestionNum">1</span> / <span id="totalQuestions">250</span></div>
+    </div>
+    
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="image-area" id="imageArea">
+        <div id="gameImage" class="guess-emoji">🐱</div>
+    </div>
+
+    <div class="answer-area">
+        <div class="input-group">
+            <input type="text" id="answerInput" placeholder="Ketik jawaban bahasa Inggris..." autocomplete="off">
+            <button id="submitBtn">✅ Tebak</button>
+            <button id="hintBtn" class="hint-btn">💡 Petunjuk</button>
+        </div>
+        <button id="nextBtn" class="next-btn">🎮 Kata Selanjutnya ➡️</button>
+    </div>
+
+    <div id="synonymBox" class="synonym-area">
+        🌟 Tebak gambar, sinonim akan muncul setelah jawaban benar! 🌟
+    </div>
+    <div id="feedbackMsg" class="feedback">
+        💬 Ketik jawaban bahasa Inggris berdasarkan gambar!
+    </div>
+
+    <div class="upload-section">
+        <strong>📸 UPLOAD GAMBAR SENDIRI</strong><br>
+        <small>Gambar tersimpan di browser (ekspor untuk pindah ke komputer lain)</small>
+        
+        <div class="upload-row">
+            <select id="wordSelect"></select>
+            <input type="file" id="uploadImage" accept="image/*">
+            <button id="saveImageBtn">💾 Simpan Gambar</button>
+        </div>
+        
+        <div id="galleryContainer" class="gallery-preview"></div>
+        <div class="info-text">
+            💡 <strong>Tips:</strong> Klik gambar di galeri untuk langsung pindah ke soal tersebut!
+        </div>
+    </div>
+    <footer style="text-align:center; font-size:0.65rem; margin-top:12px;">
+        🎉 250 vocabulary sehari-hari | Belajar sambil bermain | Bisa upload gambar sendiri
+    </footer>
+</div>
+
+<script>
+    // ======================= 250 VOCABULARY SEHARI-HARI =======================
+    const vocabularyData = [
+        // HEWAN (Animals) - 30 kata
+        { word: "cat", synonyms: ["kitten", "feline", "meow"], emoji: "🐱" },
+        { word: "dog", synonyms: ["puppy", "canine", "woof"], emoji: "🐶" },
+        { word: "bird", synonyms: ["birdie", "feather", "tweet"], emoji: "🐦" },
+        { word: "fish", synonyms: ["aquatic animal", "swimmer", "fin"], emoji: "🐟" },
+        { word: "rabbit", synonyms: ["bunny", "hare", "bunny rabbit"], emoji: "🐰" },
+        { word: "mouse", synonyms: ["rat", "rodent", "mickey"], emoji: "🐭" },
+        { word: "frog", synonyms: ["toad", "amphibian", "croaker"], emoji: "🐸" },
+        { word: "monkey", synonyms: ["primate", "ape", "chimpanzee"], emoji: "🐵" },
+        { word: "elephant", synonyms: ["pachyderm", "jumbo", "tusker"], emoji: "🐘" },
+        { word: "lion", synonyms: ["big cat", "king of jungle", "simba"], emoji: "🦁" },
+        { word: "tiger", synonyms: ["striped cat", "big cat", "sher khan"], emoji: "🐯" },
+        { word: "giraffe", synonyms: ["tall animal", "long neck", "camelopard"], emoji: "🦒" },
+        { word: "zebra", synonyms: ["striped horse", "equid", "zebry"], emoji: "🦓" },
+        { word: "bear", synonyms: ["ursine", "beruang", "panda"], emoji: "🐻" },
+        { word: "panda", synonyms: ["bear", "black and white", "bamboo bear"], emoji: "🐼" },
+        { word: "kangaroo", synonyms: ["roo", "marsupial", "joey"], emoji: "🦘" },
+        { word: "horse", synonyms: ["equine", "pony", "steed"], emoji: "🐴" },
+        { word: "cow", synonyms: ["cattle", "bovine", "moo"], emoji: "🐮" },
+        { word: "pig", synonyms: ["swine", "hog", "oink"], emoji: "🐷" },
+        { word: "sheep", synonyms: ["lamb", "ewe", "ram"], emoji: "🐑" },
+        { word: "goat", synonyms: ["billy goat", "nanny", "caprine"], emoji: "🐐" },
+        { word: "chicken", synonyms: ["hen", "rooster", "poultry"], emoji: "🐔" },
+        { word: "duck", synonyms: ["duckling", "mallard", "quack"], emoji: "🦆" },
+        { word: "butterfly", synonyms: ["caterpillar", "flutterby", "lepidoptera"], emoji: "🦋" },
+        { word: "bee", synonyms: ["honeybee", "bumblebee", "insect"], emoji: "🐝" },
+        { word: "ant", synonyms: ["insect", "worker", "formicidae"], emoji: "🐜" },
+        { word: "spider", synonyms: ["arachnid", "web maker", "tarantula"], emoji: "🕷️" },
+        { word: "snake", synonyms: ["serpent", "reptile", "cobra"], emoji: "🐍" },
+        { word: "turtle", synonyms: ["tortoise", "terrapin", "shell"], emoji: "🐢" },
+        { word: "dolphin", synonyms: ["porpoise", "marine mammal", "flipper"], emoji: "🐬" },
+        
+        // BUAH & SAYUR (Fruits & Vegetables) - 30 kata
+        { word: "apple", synonyms: ["fruit", "red fruit", "pomme"], emoji: "🍎" },
+        { word: "banana", synonyms: ["yellow fruit", "plantain", "nana"], emoji: "🍌" },
+        { word: "orange", synonyms: ["citrus", "tangerine", "sweet orange"], emoji: "🍊" },
+        { word: "grape", synonyms: ["grapes", "vine fruit", "raisin"], emoji: "🍇" },
+        { word: "strawberry", synonyms: ["berry", "red berry", "straw"], emoji: "🍓" },
+        { word: "watermelon", synonyms: ["melon", "summer fruit", "sweet melon"], emoji: "🍉" },
+        { word: "pineapple", synonyms: ["ananas", "tropical fruit", "pina"], emoji: "🍍" },
+        { word: "mango", synonyms: ["tropical fruit", "king of fruits", "mangga"], emoji: "🥭" },
+        { word: "pear", synonyms: ["pyrus", "fruit", "bosc"], emoji: "🍐" },
+        { word: "cherry", synonyms: ["cherries", "stone fruit", "berry"], emoji: "🍒" },
+        { word: "lemon", synonyms: ["citrus", "sour fruit", "limon"], emoji: "🍋" },
+        { word: "coconut", synonyms: ["tropical nut", "coquito", "coco"], emoji: "🥥" },
+        { word: "carrot", synonyms: ["vegetable", "root", "orange veggie"], emoji: "🥕" },
+        { word: "broccoli", synonyms: ["green veggie", "cruciferous", "floret"], emoji: "🥦" },
+        { word: "tomato", synonyms: ["fruit vegetable", "love apple", "tomat"], emoji: "🍅" },
+        { word: "potato", synonyms: ["spud", "tater", "root vegetable"], emoji: "🥔" },
+        { word: "cucumber", synonyms: ["cuke", "vegetable", "green veg"], emoji: "🥒" },
+        { word: "lettuce", synonyms: ["salad green", "leafy", "lactuca"], emoji: "🥬" },
+        { word: "corn", synonyms: ["maize", "sweet corn", "cereal"], emoji: "🌽" },
+        { word: "mushroom", synonyms: ["fungus", "toadstool", "portobello"], emoji: "🍄" },
+        { word: "onion", synonyms: ["bulb", "allium", "red onion"], emoji: "🧅" },
+        { word: "garlic", synonyms: ["allium", "seasoning", "clove"], emoji: "🧄" },
+        { word: "pepper", synonyms: ["bell pepper", "capsicum", "chili"], emoji: "🫑" },
+        { word: "chili", synonyms: ["hot pepper", "spice", "red chili"], emoji: "🌶️" },
+        
+        // MAKANAN & MINUMAN (Food & Drinks) - 30 kata
+        { word: "bread", synonyms: ["loaf", "baked goods", "roti"], emoji: "🍞" },
+        { word: "rice", synonyms: ["grain", "nasi", "cereal"], emoji: "🍚" },
+        { word: "noodle", synonyms: ["pasta", "ramen", "mi"], emoji: "🍜" },
+        { word: "pizza", synonyms: ["pie", "italian dish", "slice"], emoji: "🍕" },
+        { word: "burger", synonyms: ["hamburger", "sandwich", "patty"], emoji: "🍔" },
+        { word: "hotdog", synonyms: ["frankfurter", "sausage", "wiener"], emoji: "🌭" },
+        { word: "fried chicken", synonyms: ["crispy chicken", "popcorn chicken", "ayam goreng"], emoji: "🍗" },
+        { word: "egg", synonyms: ["oval food", "telur", "omelette"], emoji: "🥚" },
+        { word: "cheese", synonyms: ["dairy", "fromage", "cheddar"], emoji: "🧀" },
+        { word: "milk", synonyms: ["dairy drink", "susu", "lactose"], emoji: "🥛" },
+        { word: "water", synonyms: ["h2o", "drink", "aqua"], emoji: "💧" },
+        { word: "juice", synonyms: ["beverage", "smoothie", "sari buah"], emoji: "🧃" },
+        { word: "coffee", synonyms: ["caffeine", "espresso", "kopi"], emoji: "☕" },
+        { word: "tea", synonyms: ["beverage", "chai", "teh"], emoji: "🍵" },
+        { word: "cake", synonyms: ["dessert", "pastry", "kue"], emoji: "🍰" },
+        { word: "ice cream", synonyms: ["gelato", "frozen dessert", "sorbet"], emoji: "🍦" },
+        { word: "chocolate", synonyms: ["candy", "cocoa", "sweet"], emoji: "🍫" },
+        { word: "candy", synonyms: ["sweet", "lollipop", "permen"], emoji: "🍬" },
+        { word: "cookie", synonyms: ["biscuit", "wafer", "kue kering"], emoji: "🍪" },
+        { word: "doughnut", synonyms: ["donut", "ring cake", "sweet ring"], emoji: "🍩" },
+        
+        // RUMAH & BENDA (House & Objects) - 35 kata
+        { word: "house", synonyms: ["home", "residence", "building"], emoji: "🏠" },
+        { word: "school", synonyms: ["academy", "institution", "sekolah"], emoji: "🏫" },
+        { word: "hospital", synonyms: ["clinic", "medical center", "rumah sakit"], emoji: "🏥" },
+        { word: "restaurant", synonyms: ["eatery", "cafe", "diner"], emoji: "🍽️" },
+        { word: "park", synonyms: ["garden", "playground", "taman"], emoji: "🏞️" },
+        { word: "bed", synonyms: ["bedroom", "sleeping place", "tempat tidur"], emoji: "🛏️" },
+        { word: "chair", synonyms: ["seat", "stool", "kursi"], emoji: "🪑" },
+        { word: "table", synonyms: ["desk", "meja", "counter"], emoji: "🪑" },
+        { word: "door", synonyms: ["entrance", "gate", "pintu"], emoji: "🚪" },
+        { word: "window", synonyms: ["glass", "jendela", "pane"], emoji: "🪟" },
+        { word: "book", synonyms: ["novel", "textbook", "buku"], emoji: "📚" },
+        { word: "pen", synonyms: ["ballpoint", "writer", "pulpen"], emoji: "✒️" },
+        { word: "pencil", synonyms: ["writing tool", "graphite", "pensil"], emoji: "✏️" },
+        { word: "eraser", synonyms: ["rubber", "penghapus", "remover"], emoji: "🧽" },
+        { word: "ruler", synonyms: ["measuring tool", "straight edge", "penggaris"], emoji: "📏" },
+        { word: "backpack", synonyms: ["bag", "school bag", "ransel"], emoji: "🎒" },
+        { word: "television", synonyms: ["tv", "screen", "telly"], emoji: "📺" },
+        { word: "computer", synonyms: ["laptop", "pc", "komputer"], emoji: "💻" },
+        { word: "phone", synonyms: ["smartphone", "mobile", "handphone"], emoji: "📱" },
+        { word: "clock", synonyms: ["watch", "timepiece", "jam"], emoji: "⏰" },
+        { word: "lamp", synonyms: ["light", "lantern", "lampu"], emoji: "💡" },
+        { word: "refrigerator", synonyms: ["fridge", "freezer", "kulkas"], emoji: "🧊" },
+        { word: "stove", synonyms: ["oven", "cooker", "kompor"], emoji: "🍳" },
+        { word: "spoon", synonyms: ["utensil", "sendok", "scoop"], emoji: "🥄" },
+        { word: "fork", synonyms: ["utensil", "eating tool", "garpu"], emoji: "🍴" },
+        { word: "knife", synonyms: ["blade", "cutter", "pisau"], emoji: "🔪" },
+        { word: "plate", synonyms: ["dish", "piring", "saucer"], emoji: "🍽️" },
+        { word: "cup", synonyms: ["mug", "glass", "cangkir"], emoji: "🥤" },
+        { word: "ball", synonyms: ["sphere", "bola", "orb"], emoji: "⚽" },
+        { word: "toy", synonyms: ["plaything", "doll", "mainan"], emoji: "🧸" },
+        { word: "bicycle", synonyms: ["bike", "cycle", "sepeda"], emoji: "🚲" },
+        { word: "car", synonyms: ["automobile", "vehicle", "mobil"], emoji: "🚗" },
+        { word: "bus", synonyms: ["public transport", "coach", "bis"], emoji: "🚌" },
+        { word: "train", synonyms: ["railway", "locomotive", "kereta"], emoji: "🚂" },
+        { word: "airplane", synonyms: ["plane", "jet", "pesawat"], emoji: "✈️" },
+        
+        // ALAM & CUACA (Nature & Weather) - 30 kata
+        { word: "sun", synonyms: ["sunshine", "star", "matahari"], emoji: "☀️" },
+        { word: "moon", synonyms: ["lunar", "satellite", "bulan"], emoji: "🌙" },
+        { word: "star", synonyms: ["celestial", "bintang", "astral"], emoji: "⭐" },
+        { word: "cloud", synonyms: ["cumulus", "awan", "nimbus"], emoji: "☁️" },
+        { word: "rain", synonyms: ["precipitation", "hujan", "shower"], emoji: "🌧️" },
+        { word: "snow", synonyms: ["salju", "flurry", "blizzard"], emoji: "❄️" },
+        { word: "wind", synonyms: ["breeze", "angin", "gale"], emoji: "💨" },
+        { word: "storm", synonyms: ["thunderstorm", "badai", "tempest"], emoji: "🌩️" },
+        { word: "rainbow", synonyms: ["spectrum", "pelangi", "arc"], emoji: "🌈" },
+        { word: "tree", synonyms: ["plant", "pohon", "timber"], emoji: "🌳" },
+        { word: "flower", synonyms: ["blossom", "bunga", "rose"], emoji: "🌸" },
+        { word: "grass", synonyms: ["lawn", "rumput", "turf"], emoji: "🌿" },
+        { word: "leaf", synonyms: ["daun", "foliage", "frond"], emoji: "🍃" },
+        { word: "mountain", synonyms: ["peak", "gunung", "summit"], emoji: "⛰️" },
+        { word: "river", synonyms: ["stream", "sungai", "brook"], emoji: "🏞️" },
+        { word: "ocean", synonyms: ["sea", "laut", "deep blue"], emoji: "🌊" },
+        { word: "beach", synonyms: ["shore", "pantai", "coast"], emoji: "🏖️" },
+        { word: "forest", synonyms: ["woods", "hutan", "jungle"], emoji: "🌲" },
+        { word: "desert", synonyms: ["sahara", "gurun", "arid land"], emoji: "🏜️" },
+        { word: "island", synonyms: ["isle", "pulau", "atoll"], emoji: "🏝️" },
+        
+        // KELUARGA & ORANG (Family & People) - 30 kata
+        { word: "father", synonyms: ["dad", "papa", "ayah"], emoji: "👨" },
+        { word: "mother", synonyms: ["mom", "mama", "ibu"], emoji: "👩" },
+        { word: "brother", synonyms: ["sibling", "bro", "kakak laki"], emoji: "👦" },
+        { word: "sister", synonyms: ["sibling", "sis", "kakak perempuan"], emoji: "👧" },
+        { word: "baby", synonyms: ["infant", "newborn", "bayi"], emoji: "👶" },
+        { word: "grandfather", synonyms: ["grandpa", "kakek", "granddad"], emoji: "👴" },
+        { word: "grandmother", synonyms: ["grandma", "nenek", "granny"], emoji: "👵" },
+        { word: "friend", synonyms: ["buddy", "pal", "teman"], emoji: "👫" },
+        { word: "teacher", synonyms: ["guru", "educator", "instructor"], emoji: "👩‍🏫" },
+        { word: "student", synonyms: ["pupil", "murid", "learner"], emoji: "👨‍🎓" },
+        { word: "doctor", synonyms: ["physician", "dokter", "medic"], emoji: "👨‍⚕️" },
+        { word: "nurse", synonyms: ["perawat", "caregiver", "medical staff"], emoji: "👩‍⚕️" },
+        { word: "policeman", synonyms: ["police", "polisi", "officer"], emoji: "👮" },
+        { word: "firefighter", synonyms: ["fireman", "pemadam", "fireman"], emoji: "👨‍🚒" },
+        { word: "farmer", synonyms: ["petani", "agriculturist", "rancher"], emoji: "👨‍🌾" },
+        { word: "chef", synonyms: ["cook", "koki", "culinary"], emoji: "👨‍🍳" },
+        { word: "driver", synonyms: ["sopir", "chauffeur", "motorist"], emoji: "👨‍✈️" },
+        { word: "king", synonyms: ["monarch", "raja", "ruler"], emoji: "👑" },
+        { word: "queen", synonyms: ["ratu", "royalty", "monarch"], emoji: "👸" },
+        { word: "prince", synonyms: ["royal", "pangeran", "heir"], emoji: "🤴" },
+        { word: "princess", synonyms: ["royal", "putri", "noble"], emoji: "👸" },
+        
+        // AKTIVITAS & KEGIATAN (Activities) - 25 kata
+        { word: "run", synonyms: ["sprint", "lari", "jog"], emoji: "🏃" },
+        { word: "walk", synonyms: ["stroll", "jalan", "hike"], emoji: "🚶" },
+        { word: "swim", synonyms: ["berenang", "float", "dive"], emoji: "🏊" },
+        { word: "jump", synonyms: ["leap", "lompat", "hop"], emoji: "🦘" },
+        { word: "sleep", synonyms: ["tidur", "slumber", "nap"], emoji: "😴" },
+        { word: "eat", synonyms: ["makan", "consume", "dine"], emoji: "🍽️" },
+        { word: "drink", synonyms: ["minum", "sip", "beverage"], emoji: "🥤" },
+        { word: "read", synonyms: ["membaca", "peruse", "study"], emoji: "📖" },
+        { word: "write", synonyms: ["menulis", "scribble", "note"], emoji: "✍️" },
+        { word: "sing", synonyms: ["bernyanyi", "chant", "croon"], emoji: "🎤" },
+        { word: "dance", synonyms: ["menari", "groove", "boogie"], emoji: "💃" },
+        { word: "play", synonyms: ["bermain", "fun", "game"], emoji: "🎮" },
+        { word: "study", synonyms: ["belajar", "learn", "review"], emoji: "📚" },
+        { word: "work", synonyms: ["bekerja", "job", "labor"], emoji: "💼" },
+        { word: "cook", synonyms: ["masak", "prepare", "bake"], emoji: "🍳" },
+        { word: "clean", synonyms: ["bersih", "wash", "tidy"], emoji: "🧹" },
+        { word: "draw", synonyms: ["menggambar", "sketch", "paint"], emoji: "🎨" },
+        { word: "drive", synonyms: ["mengemudi", "steer", "ride"], emoji: "🚗" },
+        { word: "fly", synonyms: ["terbang", "soar", "glide"], emoji: "✈️" },
+        { word: "shop", synonyms: ["belanja", "buy", "purchase"], emoji: "🛒" },
+        
+        // WARNA & SIFAT (Colors & Adjectives) - 15 kata
+        { word: "red", synonyms: ["merah", "scarlet", "crimson"], emoji: "🔴" },
+        { word: "blue", synonyms: ["biru", "azure", "navy"], emoji: "🔵" },
+        { word: "yellow", synonyms: ["kuning", "golden", "amber"], emoji: "🟡" },
+        { word: "green", synonyms: ["hijau", "emerald", "lime"], emoji: "🟢" },
+        { word: "orange", synonyms: ["jingga", "tangerine", "amber"], emoji: "🟠" },
+        { word: "purple", synonyms: ["ungu", "violet", "lavender"], emoji: "🟣" },
+        { word: "pink", synonyms: ["merah muda", "rose", "fuchsia"], emoji: "💗" },
+        { word: "brown", synonyms: ["coklat", "chocolate", "tan"], emoji: "🟤" },
+        { word: "black", synonyms: ["hitam", "dark", "ebony"], emoji: "⚫" },
+        { word: "white", synonyms: ["putih", "snow", "ivory"], emoji: "⚪" },
+        { word: "big", synonyms: ["besar", "large", "huge"], emoji: "🐘" },
+        { word: "small", synonyms: ["kecil", "tiny", "little"], emoji: "🐜" },
+        { word: "fast", synonyms: ["cepat", "quick", "swift"], emoji: "🏃" },
+        { word: "slow", synonyms: ["lambat", "unhurried", "leisurely"], emoji: "🐢" },
+        { word: "happy", synonyms: ["senang", "joyful", "glad"], emoji: "😊" }
+    ];
+
+    // State game
+    let currentIndex = 0;
+    let score = 0;
+    let lives = 5;
+    let isAnswered = false;
+    let currentCorrectWord = "";
+    let currentSynonyms = [];
+
+    // DOM elements
+    const gameImage = document.getElementById("gameImage");
+    const answerInput = document.getElementById("answerInput");
+    const submitBtn = document.getElementById("submitBtn");
+    const hintBtn = document.getElementById("hintBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const scoreSpan = document.getElementById("scoreValue");
+    const livesSpan = document.getElementById("livesValue");
+    const currentQuestionSpan = document.getElementById("currentQuestionNum");
+    const totalQuestionsSpan = document.getElementById("totalQuestions");
+    const progressFill = document.getElementById("progressFill");
+    const synonymBox = document.getElementById("synonymBox");
+    const feedbackDiv = document.getElementById("feedbackMsg");
+    const wordSelect = document.getElementById("wordSelect");
+    const uploadImage = document.getElementById("uploadImage");
+    const saveImageBtn = document.getElementById("saveImageBtn");
+    const galleryContainer = document.getElementById("galleryContainer");
+
+    totalQuestionsSpan.innerText = vocabularyData.length;
+
+    // Simpan gambar ke localStorage
+    function saveImageToLocal(word, imageDataUrl) {
+        const idx = vocabularyData.findIndex(v => v.word === word);
+        if (idx !== -1) {
+            vocabularyData[idx].imageFile = imageDataUrl;
+        }
+        const allImages = {};
+        vocabularyData.forEach(v => {
+            if (v.imageFile) allImages[v.word] = v.imageFile;
+        });
+        localStorage.setItem("vocabulary_images_250", JSON.stringify(allImages));
+        renderGallery();
+        if (currentCorrectWord === word) displayCurrentImage();
+    }
+    
+    function loadImagesFromLocal() {
+        const stored = localStorage.getItem("vocabulary_images_250");
+        if (stored) {
+            const allImages = JSON.parse(stored);
+            vocabularyData.forEach(v => {
+                if (allImages[v.word]) v.imageFile = allImages[v.word];
+            });
+        }
+        renderGallery();
+    }
+    
+    function displayCurrentImage() {
+        const currentItem = vocabularyData.find(v => v.word === currentCorrectWord);
+        if (currentItem && currentItem.imageFile) {
+            gameImage.innerHTML = `<img src="${currentItem.imageFile}" class="guess-img" style="max-width:100%; max-height:240px;">`;
+        } else {
+            gameImage.innerHTML = `<div class="guess-emoji">${currentItem ? currentItem.emoji : "❓"}</div>`;
+        }
+    }
+    
+    function renderGallery() {
+        galleryContainer.innerHTML = "";
+        let count = 0;
+        for (let item of vocabularyData) {
+            if (item.imageFile && count < 20) {
+                count++;
+                const div = document.createElement("div");
+                div.className = "gallery-item";
+                div.innerHTML = `<img src="${item.imageFile}" alt="${item.word}"><span>${item.word}</span>`;
+                div.onclick = () => {
+                    if (currentCorrectWord === item.word) {
+                        displayCurrentImage();
+                    } else {
+                        if (confirm(`Pindah ke soal "${item.word}"?`)) {
+                            const newIndex = vocabularyData.findIndex(v => v.word === item.word);
+                            if (newIndex !== -1) {
+                                currentIndex = newIndex;
+                                loadQuestion();
+                            }
+                        }
+                    }
+                };
+                galleryContainer.appendChild(div);
+            }
+        }
+        if (count === 0) {
+            galleryContainer.innerHTML = "<small>📷 Upload gambar untuk kata favoritmu!</small>";
+        }
+    }
+    
+    function populateWordSelect() {
+        wordSelect.innerHTML = "";
+        vocabularyData.forEach((item, idx) => {
+            const option = document.createElement("option");
+            option.value = idx;
+            option.textContent = `${item.word.toUpperCase()} (${item.synonyms[0]})`;
+            wordSelect.appendChild(option);
+        });
+    }
+    
+    saveImageBtn.addEventListener("click", () => {
+        const selectedIdx = parseInt(wordSelect.value);
+        const selectedWord = vocabularyData[selectedIdx].word;
+        const file = uploadImage.files[0];
+        if (!file) { alert("Pilih gambar dulu!"); return; }
+        if (!file.type.startsWith("image/")) { alert("File harus gambar!"); return; }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            saveImageToLocal(selectedWord, e.target.result);
+            alert(`✅ Gambar untuk "${selectedWord}" tersimpan!`);
+            uploadImage.value = "";
+            if (currentCorrectWord === selectedWord) displayCurrentImage();
+        };
+        reader.readAsDataURL(file);
+    });
+    
+    function updateStatsUI() {
+        scoreSpan.innerText = score;
+        livesSpan.innerText = lives;
+        currentQuestionSpan.innerText = currentIndex + 1;
+        const progressPercent = ((currentIndex + 1) / vocabularyData.length) * 100;
+        progressFill.style.width = progressPercent + "%";
+    }
+    
+    function showSynonyms(synArray) {
+        let sinonimText = synArray.map(s => `📖 ${s}`).join("   •   ");
+        synonymBox.innerHTML = `🎉 Sinonim dari "${currentCorrectWord.toUpperCase()}": <span style="background:#ffecb3; padding:5px 12px; border-radius:40px; display:inline-block;">${sinonimText}</span> 🎉`;
+    }
+    
+    function checkAnswer() {
+        if (isAnswered) { feedbackDiv.innerHTML = "⚠️ Sudah dijawab! Tekan 'Kata Selanjutnya'."; return; }
+        if (lives <= 0) { feedbackDiv.innerHTML = "💀 Game Over! Refresh untuk main lagi."; return; }
+        const userAnswer = answerInput.value.trim().toLowerCase();
+        if (userAnswer === "") { feedbackDiv.innerHTML = "✏️ Masukkan jawaban!"; return; }
+        const isMainMatch = (userAnswer === currentCorrectWord);
+        const isSynonymMatch = currentSynonyms.some(syn => syn.toLowerCase() === userAnswer);
+        if (isMainMatch || isSynonymMatch) {
+            score++; updateStatsUI(); isAnswered = true;
+            feedbackDiv.innerHTML = "🎉 Benar! +1 Skor 🎉";
+            feedbackDiv.classList.add("message-positive");
+            showSynonyms(currentSynonyms);
+            answerInput.disabled = true; submitBtn.disabled = true;
+            setTimeout(() => feedbackDiv.classList.remove("message-positive"), 1500);
+        } else {
+            lives--; updateStatsUI();
+            if (lives <= 0) {
+                feedbackDiv.innerHTML = `😭 Game Over! Skor: ${score}. Refresh untuk main lagi.`;
+                answerInput.disabled = true; submitBtn.disabled = true; hintBtn.disabled = true;
+                return;
+            }
+            feedbackDiv.innerHTML = `❌ Salah! Jawaban: "${currentCorrectWord}". Sisa nyawa: ${lives}`;
+            feedbackDiv.classList.add("message-wrong");
+            setTimeout(() => feedbackDiv.classList.remove("message-wrong"), 1500);
+            answerInput.value = ""; answerInput.focus();
+        }
+    }
+    
+    function giveHint() {
+        if (isAnswered) { feedbackDiv.innerHTML = "Soal sudah dijawab, lanjut ya!"; return; }
+        if (lives <= 0) return;
+        const firstLetter = currentCorrectWord.charAt(0).toUpperCase();
+        const wordLength = currentCorrectWord.length;
+        feedbackDiv.innerHTML = `🔎 Petunjuk: Huruf depan "${firstLetter}", panjang ${wordLength} huruf. Sinonim juga diterima!`;
+        setTimeout(() => feedbackDiv.classList.remove("message-positive"), 2000);
+    }
+    
+    function loadQuestion() {
+        isAnswered = false;
+        answerInput.disabled = false;
+        submitBtn.disabled = false;
+        answerInput.value = "";
+        answerInput.focus();
+        const data = vocabularyData[currentIndex];
+        currentCorrectWord = data.word;
+        currentSynonyms = data.synonyms;
+        displayCurrentImage();
+        synonymBox.innerHTML = "🌟 Tebak gambar, sinonim akan muncul setelah benar! 🌟";
+        feedbackDiv.innerHTML = "🔍 Apa nama benda ini dalam bahasa Inggris?";
+        updateStatsUI();
+    }
+    
+    function nextQuestion() {
+        if (lives <= 0) { feedbackDiv.innerHTML = "Game Over! Refresh halaman."; return; }
+        if (!isAnswered && lives > 0) {
+            if (confirm("⚠️ Belum menjawab! Lanjut akan mengurangi 1 nyawa. Lanjut?")) {
+                lives--; updateStatsUI();
+                if (lives <= 0) { feedbackDiv.innerHTML = "💀 Game Over!"; return; }
+                currentIndex = (currentIndex + 1) % vocabularyData.length;
+                loadQuestion();
+            }
+        } else {
+            currentIndex = (currentIndex + 1) % vocabularyData.length;
+            loadQuestion();
+        }
+    }
+    
+    submitBtn.addEventListener("click", checkAnswer);
+    hintBtn.addEventListener("click", giveHint);
+    nextBtn.addEventListener("click", nextQuestion);
+    answerInput.addEventListener("keypress", (e) => { if (e.key === "Enter") checkAnswer(); });
+    
+    populateWordSelect();
+    loadImagesFromLocal();
+    updateStatsUI();
+    loadQuestion();
+</script>
+</body>
+</html>
